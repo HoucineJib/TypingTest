@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing AI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="test-page">
+        <div id="settings">
+            <div id="level-selector">
+                <button class="level-btn active" data-level="beginner">Débutant</button>
+                <button class="level-btn" data-level="intermediate">Intermédiaire</button>
+                <button class="level-btn" data-level="advanced">Avancé</button>
+            </div>
+            <div id="time-selector">
+                <button class="time-btn" data-time="30">30 sec</button>
+                <button class="time-btn active" data-time="60">1 min</button>
+                <button class="time-btn" data-time="180">3 min</button>
+            </div>
+        </div>
+        
+        <div id="test-area">
+            <div id="timer">60</div>
+            <div class="text-display" id="text-display"></div>
+            <div id="input-area">
+                <div class="input-container">
+                    <textarea id="input-field" rows="3" placeholder="Le texte apparaîtra ici..." disabled></textarea>
+                    <button id="restart-button" class="restart-btn" disabled>
+                        <img src="icons8-redémarrer-50.png" alt="Recommencer">
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="keyboard">
+            <!-- Le clavier sera généré dynamiquement via JavaScript -->
+        </div>
+    </div>
+
+    <div id="results-page" class="hidden">
+        <div class="results-container">
+            <h2>Résultats</h2>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <h3>Vitesse</h3>
+                    <p><span id="final-wpm">0</span> MPM</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Précision</h3>
+                    <p><span id="final-accuracy">0</span>%</p>
+                </div>
+            </div>
+            <div id="error-analysis" class="error-section">
+                <h3>Analyse des Erreurs</h3>
+                <div id="error-details"></div>
+            </div>
+            <button id="restart-test" class="restart-btn">Retourner au test</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

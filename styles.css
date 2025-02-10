@@ -1,0 +1,326 @@
+/* Variables */
+:root {
+    --bg-color: #1e1e1e;
+    --text-color: #ffffff;
+    --highlight-color: #ff6b00;
+    --error-color: #ff4444;
+    --correct-color: #4caf50;
+    --keyboard-bg: transparent;
+    --key-bg: #2d2d2d;
+}
+
+/* Styles généraux */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Page de test */
+#test-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Zone de paramètres */
+#settings {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+}
+
+#level-selector, #time-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.level-btn, .time-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--keyboard-bg);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.level-btn:hover, .time-btn:hover {
+    background-color: var(--key-bg);
+}
+
+.level-btn.active, .time-btn.active {
+    background-color: var(--highlight-color);
+}
+
+/* Zone de test */
+#test-area {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#timer {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--highlight-color);
+    margin-bottom: 1rem;
+}
+
+#text-display, #input-field {
+    width: 100%;
+    min-height: 100px;
+    background-color: var(--key-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    overflow-y: auto;
+    word-spacing: 0.5em;
+    word-break: keep-all;  /* Empêche la coupure des mots */
+    overflow-wrap: break-word;  /* Force le passage à la ligne pour les mots longs */
+}
+
+#input-field {
+    border: 2px solid var(--key-bg);
+    color: var(--text-color);
+    resize: none;
+    text-align: left;
+    width: 800px;
+    margin-left: 70px;
+    word-spacing: -5px;
+}
+
+#input-field:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+}
+
+.input-container {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+#restart-button {
+    padding: 1rem;
+    height: 3.4rem;
+    width: 3.4rem;
+    background-color: var(--key-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#restart-button img {
+    filter: invert(57%) sepia(93%) saturate(1752%) hue-rotate(360deg) brightness(100%) contrast(105%);
+    width: 24px;
+    height: 24px;
+}
+
+#restart-button:hover {
+    background-color: var(--highlight-color);
+}
+
+#restart-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Styles pour le texte */
+.word {
+    display: inline-block;
+    margin-right: 0.4rem;
+}
+
+.char {
+    display: inline-block;
+}
+
+.char.correct {
+    color: var(--correct-color);
+}
+
+.char.error {
+    color: var(--error-color);
+    text-decoration: underline;
+}
+
+.current-word {
+    /* Suppression du style de mise en évidence */
+}
+
+/* Clavier */
+#keyboard {
+    width: 87%;
+    max-width: 925px;
+    margin: 1.75rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    margin: 0.15rem 0;
+}
+
+.key {
+    background-color: #2a2a2a;
+    color: var(--text-color);
+    padding: 0.4rem 0.65rem;
+    border-radius: 5px;
+    min-width: 2rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #3d3d3d;
+    position: relative;
+}
+
+.special-char {
+    font-size: 0.7rem;
+    position: absolute;
+    top: 0.2rem;
+    opacity: 0.8;
+}
+
+.main-char {
+    position: absolute;
+    bottom: 0.2rem;
+}
+
+/* Touches spéciales */
+.key[data-key="Tab"],
+.key[data-key="Caps"],
+.key[data-key="Shift"],
+.key[data-key="Ctrl"],
+.key[data-key="Win"],
+.key[data-key="Alt"],
+.key[data-key="AltGr"],
+.key[data-key="Menu"] {
+    min-width: 3.15rem;
+    background-color: #252525;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Barre d'espace */
+.key[data-key=" "] {
+    min-width: 18rem;
+    height: 2.5rem;
+}
+
+.key.active {
+    background-color: var(--highlight-color);
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.key.wide {
+    min-width: 3rem;
+}
+
+.key.extra-wide {
+    min-width: 4rem;
+}
+
+/* Page de résultats */
+#results-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 1000;
+}
+
+.results-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--keyboard-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    min-width: 200px;
+}
+
+.stat-box h3 {
+    margin: 0 0 1rem 0;
+    color: var(--highlight-color);
+}
+
+.stat-box p {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.error-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+}
+
+.restart-btn {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background-color: var(--highlight-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.restart-btn:hover {
+    transform: scale(1.05);
+}
+
+.hidden {
+    display: none !important;
+}
